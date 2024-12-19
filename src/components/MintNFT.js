@@ -143,7 +143,7 @@ const MintNFT = ({ provider, signer, walletAddress }) => {
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Fetch Stock Prices from Finnhub
+  // Fetch stock prices from Finnhub
   const fetchStockPrices = async () => {
     try {
       setLoading(true); // Show loading state
@@ -184,24 +184,22 @@ const MintNFT = ({ provider, signer, walletAddress }) => {
       return;
     }
 
-    const rank = stockData.findIndex((company) => company.symbol === selectedCompany) + 1;
-    const priority = rank === 1 ? "Gold" : rank === 2 ? "Silver" : "Bronze";
-
     try {
       const contract = new Contract(CONTRACT_ADDRESS, contractABI, signer);
-      const tx = await contract.mintNFT(walletAddress, priority);
-      toast.info(`Minting ${priority} NFT for ${selectedCompany}...`);
+      const tx = await contract.mintNFT(walletAddress, selectedCompany);
+      toast.info(`Minting NFT for ${selectedCompany}...`);
       await tx.wait();
-      toast.success(`${priority} NFT minted for ${selectedCompany}!`);
+      toast.success(`NFT minted for ${selectedCompany}!`);
     } catch (error) {
       console.error("Minting failed:", error);
       toast.error("Failed to mint NFT.");
     }
   };
 
+  // Fetch stock prices on mount and refresh every 10 seconds
   useEffect(() => {
     fetchStockPrices();
-    const interval = setInterval(fetchStockPrices, 120000); // Refresh every 10 seconds
+    const interval = setInterval(fetchStockPrices, 120000); // Refresh every 120 seconds
     return () => clearInterval(interval);
   }, []);
 

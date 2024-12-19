@@ -117,15 +117,16 @@ const AdminPanel = ({ provider, signer }) => {
 
     try {
       setUploading(true);
-      const fileURI = await uploadFileToIPFS(file); // Upload file to IPFS
+      const fileURI = await uploadFileToIPFS(file); // Upload image to IPFS
       const metadataWithFile = {
         ...metadata,
         image: fileURI, // Add image URI to metadata
       };
       const metadataURI = await uploadJSONToIPFS(metadataWithFile); // Upload metadata JSON to IPFS
 
+      // Interact with the smart contract
       const contract = new Contract(CONTRACT_ADDRESS, contractABI, signer);
-      const tx = await contract.setCompanyURI(company, metadataURI); // Set URI on the smart contract
+      const tx = await contract.setCompanyURI(company, metadataURI); // Set URI for the company
       toast.info("Setting company URI...");
       await tx.wait();
 
@@ -140,62 +141,60 @@ const AdminPanel = ({ provider, signer }) => {
 
   return (
     <div className="p-6 space-y-6 bg-gray-900 text-white rounded-md shadow-md">
-      <h2 className="text-2xl font-bold">Admin Panel - Set Company NFTs</h2>
+      <h2 className="text-2xl font-bold">Admin Panel - Manage Company NFTs</h2>
 
       {/* File Upload Section */}
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Upload NFT Metadata</h3>
 
-        <div className="flex flex-col space-y-4">
-          {/* File Input */}
-          <label className="text-gray-400">
-            Upload Image File:
-            <input
-              type="file"
-              onChange={(e) => setFile(e.target.files[0])}
-              className="w-full mt-2 p-2 border border-gray-600 rounded-md bg-gray-800 text-white"
-            />
-          </label>
+        {/* File Input */}
+        <div className="flex flex-col space-y-2">
+          <label className="text-gray-400">Upload Image File:</label>
+          <input
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+            className="w-full p-2 border border-gray-600 rounded-md bg-gray-800 text-white"
+          />
+        </div>
 
-          {/* NFT Name Input */}
-          <label className="text-gray-400">
-            NFT Name:
-            <input
-              type="text"
-              placeholder="Enter NFT Name"
-              value={metadata.name}
-              onChange={(e) => setMetadata({ ...metadata, name: e.target.value })}
-              className="w-full mt-2 p-2 border border-gray-600 rounded-md bg-gray-800 text-white"
-            />
-          </label>
+        {/* NFT Name Input */}
+        <div className="flex flex-col space-y-2">
+          <label className="text-gray-400">NFT Name:</label>
+          <input
+            type="text"
+            placeholder="Enter NFT Name"
+            value={metadata.name}
+            onChange={(e) => setMetadata({ ...metadata, name: e.target.value })}
+            className="w-full p-2 border border-gray-600 rounded-md bg-gray-800 text-white"
+          />
+        </div>
 
-          {/* NFT Description Input */}
-          <label className="text-gray-400">
-            NFT Description:
-            <textarea
-              placeholder="Enter NFT Description"
-              value={metadata.description}
-              onChange={(e) =>
-                setMetadata({ ...metadata, description: e.target.value })
-              }
-              className="w-full mt-2 p-2 border border-gray-600 rounded-md bg-gray-800 text-white"
-            ></textarea>
-          </label>
+        {/* NFT Description Input */}
+        <div className="flex flex-col space-y-2">
+          <label className="text-gray-400">NFT Description:</label>
+          <textarea
+            placeholder="Enter NFT Description"
+            value={metadata.description}
+            onChange={(e) =>
+              setMetadata({ ...metadata, description: e.target.value })
+            }
+            className="w-full p-2 border border-gray-600 rounded-md bg-gray-800 text-white"
+          ></textarea>
+        </div>
 
-          {/* Company Selection */}
-          <label className="text-gray-400">
-            Select Company:
-            <select
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              className="w-full mt-2 p-2 border border-gray-600 rounded-md bg-gray-800 text-white"
-            >
-              <option value="">Select Company</option>
-              <option value="AAPL">Apple</option>
-              <option value="MSFT">Microsoft</option>
-              <option value="TSLA">Tesla</option>
-            </select>
-          </label>
+        {/* Company Selection */}
+        <div className="flex flex-col space-y-2">
+          <label className="text-gray-400">Select Company:</label>
+          <select
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            className="w-full p-2 border border-gray-600 rounded-md bg-gray-800 text-white"
+          >
+            <option value="">Select Company</option>
+            <option value="AAPL">Apple</option>
+            <option value="MSFT">Microsoft</option>
+            <option value="TSLA">Tesla</option>
+          </select>
         </div>
 
         {/* Upload Button */}
