@@ -77,7 +77,7 @@ const App = () => {
       
       {/* Header */}
       <h1 className="text-3xl font-bold text-white">
-        Priority NFT Minting Platform on Arbitrum Testnet
+        Priority NFT Minting Platform on Polygon Mainnet
       </h1>
 
       {/* Wallet Connect */}
@@ -104,7 +104,7 @@ const App = () => {
         </div>
       ) : (
         <p className="text-gray-400">
-          Please connect your wallet to access the Admin Panel and Mint NFT features.
+          Please connect your wallet and switch your network to Polygon Mainnet to access the Admin Panel and Mint NFT features. 
           
         </p>
       )}
