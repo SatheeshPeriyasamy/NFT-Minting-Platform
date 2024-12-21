@@ -1,5 +1,6 @@
 Latest Smart Contract is deployed in Polygon Mainnet.
-Contract Address: 0xE9D14Fdd0aa8B09726BCbFDA76Ce834615509b38
+Contract Address: 0x1aCE190eC3ee8eea3dAA865b5B79aF5510d8c3C0
+https://polygonscan.com/address/0x1ace190ec3ee8eea3daa865b5b79af5510d8c3c0
 
 
 

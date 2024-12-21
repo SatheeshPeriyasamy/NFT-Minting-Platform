@@ -129,12 +129,30 @@
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "newAdmin",
+				"type": "address"
+			}
+		],
+		"name": "grantAdminRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "to",
 				"type": "address"
 			},
 			{
 				"internalType": "string",
 				"name": "company",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "nftType",
 				"type": "string"
 			}
 		],
@@ -351,11 +369,16 @@
 			},
 			{
 				"internalType": "string",
+				"name": "nftType",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
 				"name": "uri",
 				"type": "string"
 			}
 		],
-		"name": "setCompanyURI",
+		"name": "setCompanyTypeURI",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -462,17 +485,17 @@
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "company",
-				"type": "string"
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
 			}
 		],
-		"name": "getCompanyURI",
+		"name": "isAdmin",
 		"outputs": [
 			{
-				"internalType": "string",
+				"internalType": "bool",
 				"name": "",
-				"type": "string"
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",

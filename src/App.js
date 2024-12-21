@@ -57,6 +57,7 @@ import React, { useState } from "react";
 import WalletConnect from "./components/WalletConnect";
 import AdminPanel from "./components/AdminPanel";
 import MintNFT from "./components/MintNFT";
+import AdminManagement from "./components/AdminManagement";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
@@ -77,7 +78,7 @@ const App = () => {
       
       {/* Header */}
       <h1 className="text-3xl font-bold text-white">
-        Priority NFT Minting Platform on Polygon Mainnet
+        NFT Minting Platform on Polygon Mainnet
       </h1>
 
       {/* Wallet Connect */}
@@ -95,17 +96,17 @@ const App = () => {
 
           {/* Mint NFT */}
           <div className="w-full max-w-md bg-gray-800 shadow-lg rounded-lg p-6">
-            <MintNFT
-              provider={provider}
-              signer={signer}
-              walletAddress={walletAddress}
-            />
+            <MintNFT provider={provider} signer={signer} walletAddress={walletAddress} />
+          </div>
+
+          {/* Admin Management */}
+          <div className="w-full max-w-md bg-gray-800 shadow-lg rounded-lg p-6">
+            <AdminManagement provider={provider} signer={signer} />
           </div>
         </div>
       ) : (
         <p className="text-gray-400">
-          Please connect your wallet and switch your network to Polygon Mainnet to access the Admin Panel and Mint NFT features. 
-          
+          Please connect your wallet and switch your network to Polygon Mainnet to access the Admin Panel and Mint NFT features.
         </p>
       )}
     </div>
